@@ -17,6 +17,7 @@ body {
     position: fixed;
     left: 0;
     top: 0;
+    z-index: 100;
 }
 
 #left-column .draggable {
@@ -29,7 +30,7 @@ body {
     border-radius: 5px;
     padding: 5px;
     background: white;
-    object-fit: contain; /* FIX: Ensures images display properly */
+    object-fit: contain;
 }
 
 #left-column .draggable:hover {
@@ -72,7 +73,11 @@ body {
     z-index: 100;
 }
 
-/* FIX: Make dragged items clearly visible */
+/* FIX: Make sure the original images stay visible when dragging */
+.ui-draggable {
+    opacity: 1 !important;
+}
+
 .ui-draggable-dragging {
     opacity: 0.8 !important;
     z-index: 10000 !important;
@@ -80,11 +85,8 @@ body {
     box-shadow: 0 5px 15px rgba(0,0,0,0.3) !important;
 }
 
-/* Fix for any broken images */
-img:not([src]) {
-    display: none !important;
-}
-
-img[src=""] {
-    display: none !important;
+/* Ensure original images don't disappear */
+#left-column img {
+    visibility: visible !important;
+    opacity: 1 !important;
 }
