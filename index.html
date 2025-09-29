@@ -2,8 +2,8 @@
 <html>
 <head>
     <link rel="stylesheet" href="style.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 </head>
 <body>
     <div id="left-column">
@@ -64,40 +64,18 @@
     </div>
     
     <div id="right-column">
-        <div id="stickman-container">
-            <img src="images/stickman.png" id="stickman-base">
-            <img src="images/logo.png" id="logo">
-        </div>
+        <img src="images/stickman.png">
+        <img src="images/logo.png" id="logo">
     </div>
-    
+
     <script>
-        $(function() {
-            // Make all draggable items draggable
-            $('.draggable').draggable({
-                containment: 'body',
-                stack: '.draggable',
-                cursor: 'move',
-                revert: 'invalid',
-                zIndex: 1000
-            });
-            
-            // Make the stickman container a droppable area
-            $('#stickman-container').droppable({
-                accept: '.draggable',
-                drop: function(event, ui) {
-                    // When an item is dropped on the stickman, position it relative to the stickman
-                    var dropped = ui.draggable;
-                    var dropPos = $(this).offset();
-                    var dragPos = ui.offset;
-                    
-                    dropped.css({
-                        position: 'absolute',
-                        left: (dragPos.left - dropPos.left) + 'px',
-                        top: (dragPos.top - dropPos.top) + 'px'
-                    }).appendTo($(this));
-                }
-            });
+    $(function() {
+        $('.draggable').draggable({
+            cursor: 'move',
+            zIndex: 100,
+            containment: 'body'
         });
+    });
     </script>
 </body>
 </html>
