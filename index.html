@@ -64,47 +64,58 @@
     </div>
     
     <div id="right-column">
-        <div id="stickman-area">
+        <div id="stickman-container">
             <img src="images/stickman.png" id="stickman">
         </div>
         <img src="images/logo.png" id="logo">
     </div>
 
     <script>
-    $(function() {
-        // Make items draggable
+    $(document).ready(function() {
+        // Make items draggable - FIX: Use 'original' helper to see what you're dragging
         $('.draggable').draggable({
             cursor: 'move',
             zIndex: 1000,
-            helper: 'clone',
+            helper: 'original', // This shows the actual image when dragging
+            opacity: 0.7,
             revert: 'invalid'
         });
         
-        // Make stickman area droppable
-        $('#stickman-area').droppable({
+        // Make stickman container droppable
+        $('#stickman-container').droppable({
             accept: '.draggable',
             drop: function(event, ui) {
-                // Create a copy of the dragged image
-                var clone = ui.helper.clone();
+                // Get the original image source
+                var originalSrc = ui.draggable.attr('src');
                 
-                // Remove draggable classes
-                clone.removeClass('ui-draggable ui-draggable-handle');
+                // Create new image
+                var newImage = $('<img>').attr('src', originalSrc);
                 
-                // Position it where it was dropped
-                var stickmanOffset = $('#stickman-area').offset();
-                var left = ui.position.left - stickmanOffset.left;
-                var top = ui.position.top - stickmanOffset.top;
+                // Calculate position relative to stickman container
+                var containerOffset = $(this).offset();
+                var left = ui.offset.left - containerOffset.left;
+                var top = ui.offset.top - containerOffset.top;
                 
-                clone.css({
+                // Style the new image
+                newImage.css({
                     'position': 'absolute',
                     'left': left + 'px',
                     'top': top + 'px',
                     'width': '80px',
-                    'z-index': '10'
+                    'z-index': '10',
+                    'pointer-events': 'none'
                 });
                 
-                // Add to stickman area
-                $('#stickman-area').append(clone);
+                // Add to container
+                $(this).append(newImage);
+                
+                console.log('Item placed on stickman!');
+            },
+            over: function() {
+                $(this).css('background-color', 'rgba(255,255,255,0.95)');
+            },
+            out: function() {
+                $(this).css('background-color', 'rgba(255,255,255,0.9)');
             }
         });
     });
