@@ -72,29 +72,35 @@
 
     <script>
     $(function() {
-        // Simple draggable - items stay visible when dragging
+        // Make items draggable
         $('.draggable').draggable({
             cursor: 'move',
             zIndex: 1000,
-            helper: 'original' // This keeps the original image visible
+            helper: 'clone',
+            revert: 'invalid'
         });
         
-        // Simple droppable - items stay where you drop them
+        // Make stickman area droppable
         $('#stickman-area').droppable({
             accept: '.draggable',
             drop: function(event, ui) {
-                // Clone the dragged image
+                // Create a copy of the dragged image
                 var clone = ui.helper.clone();
                 
-                // Remove draggable class so it stays put
-                clone.removeClass('draggable ui-draggable ui-draggable-handle');
+                // Remove draggable classes
+                clone.removeClass('ui-draggable ui-draggable-handle');
                 
-                // Position it exactly where dropped
+                // Position it where it was dropped
+                var stickmanOffset = $('#stickman-area').offset();
+                var left = ui.position.left - stickmanOffset.left;
+                var top = ui.position.top - stickmanOffset.top;
+                
                 clone.css({
                     'position': 'absolute',
-                    'left': ui.position.left + 'px',
-                    'top': ui.position.top + 'px',
-                    'width': '80px'
+                    'left': left + 'px',
+                    'top': top + 'px',
+                    'width': '80px',
+                    'z-index': '10'
                 });
                 
                 // Add to stickman area
