@@ -4,6 +4,7 @@ body {
     width: 100%;                                           
     background-color: white;
     overflow-x: hidden;
+    font-family: Arial, sans-serif;
 }
 
 #left-column {
@@ -16,13 +17,22 @@ body {
     position: fixed;
     left: 0;
     top: 0;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
 }
 
 #left-column .draggable {
     width: 80px;
-    margin: 5px;
+    margin: 10px;
     cursor: move;
     display: block;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+#left-column .draggable:hover {
+    border-color: #007bff;
+    transform: scale(1.05);
 }
 
 #right-column {
@@ -30,11 +40,20 @@ body {
     padding: 20px;
     min-height: 100vh;
     text-align: center;
+    background-color: white;
+    position: relative;
 }
 
-#right-column img:first-of-type {
-    width: 300px;
+#stickman-container {
+    position: relative;
+    display: inline-block;
     margin-top: 50px;
+}
+
+#stickman {
+    width: 300px;
+    position: relative;
+    z-index: 1;
 }
 
 #logo {
@@ -42,14 +61,33 @@ body {
     width: 150px;
     bottom: 20px;
     right: 10px;
+    z-index: 100;
 }
 
-/* Fix for draggable items */
+/* Draggable item styles */
 .draggable {
     position: relative;
+    user-select: none;
 }
 
 .ui-draggable-dragging {
-    transform: scale(1.2);
-    z-index: 10000;
+    transform: scale(1.1);
+    z-index: 10000 !important;
+    opacity: 0.8;
+}
+
+/* Make dropped items stay in place */
+#right-column .draggable {
+    position: absolute;
+    pointer-events: auto;
+}
+
+/* Category headings */
+.category {
+    font-weight: bold;
+    color: #333;
+    margin: 15px 0 5px 10px;
+    font-size: 14px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
 }
