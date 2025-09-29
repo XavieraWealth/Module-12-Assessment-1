@@ -4,6 +4,7 @@ body {
     width: 100%;                                           
     background-color: white;
     overflow-x: hidden;
+    font-family: Arial, sans-serif;
 }
 
 #left-column {
@@ -20,9 +21,20 @@ body {
 
 #left-column .draggable {
     width: 80px;
+    height: 80px;
     margin: 10px;
     cursor: move;
     display: block;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    padding: 5px;
+    background: white;
+    object-fit: contain; /* FIX: Ensures images display properly */
+}
+
+#left-column .draggable:hover {
+    border-color: #007bff;
+    transform: scale(1.05);
 }
 
 #right-column {
@@ -30,19 +42,20 @@ body {
     padding: 20px;
     min-height: 100vh;
     text-align: center;
-    background-color: #e9ecef;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
-#stickman-area {
+#stickman-container {
     position: relative;
     display: inline-block;
     margin-top: 50px;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    background: rgba(255,255,255,0.9);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     min-height: 500px;
     min-width: 400px;
+    transition: background-color 0.3s ease;
 }
 
 #stickman {
@@ -56,11 +69,22 @@ body {
     width: 150px;
     bottom: 20px;
     right: 10px;
+    z-index: 100;
 }
 
-/* Make sure dragged items are visible */
+/* FIX: Make dragged items clearly visible */
 .ui-draggable-dragging {
-    opacity: 0.8;
+    opacity: 0.8 !important;
     z-index: 10000 !important;
-    transform: scale(1.1);
+    transform: scale(1.2) !important;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3) !important;
+}
+
+/* Fix for any broken images */
+img:not([src]) {
+    display: none !important;
+}
+
+img[src=""] {
+    display: none !important;
 }
