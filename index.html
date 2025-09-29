@@ -72,12 +72,22 @@
 
     <script>
     $(document).ready(function() {
-        // Make items draggable - FIX: Use 'original' helper to see what you're dragging
+        // FIX: Use clone helper but make it look like the original
         $('.draggable').draggable({
             cursor: 'move',
             zIndex: 1000,
-            helper: 'original', // This shows the actual image when dragging
-            opacity: 0.7,
+            helper: function() {
+                // Create a clone that looks exactly like the original
+                var clone = $(this).clone();
+                clone.css({
+                    'width': '80px',
+                    'border': '2px solid #007bff',
+                    'border-radius': '5px',
+                    'box-shadow': '0 5px 15px rgba(0,0,0,0.3)'
+                });
+                return clone;
+            },
+            opacity: 0.8,
             revert: 'invalid'
         });
         
@@ -108,8 +118,6 @@
                 
                 // Add to container
                 $(this).append(newImage);
-                
-                console.log('Item placed on stickman!');
             },
             over: function() {
                 $(this).css('background-color', 'rgba(255,255,255,0.95)');
