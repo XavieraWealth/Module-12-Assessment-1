@@ -64,7 +64,7 @@
     </div>
     
     <div id="right-column">
-        <img src="images/stickman.png">
+        <img src="images/stickman.png" id="stickman">
         <img src="images/logo.png" id="logo">
     </div>
 
@@ -73,7 +73,9 @@
         $('.draggable').draggable({
             cursor: 'move',
             zIndex: 100,
-            containment: 'body'
+            containment: 'document',
+            helper: 'original',
+            revert: 'invalid'
         });
     });
     </script>
