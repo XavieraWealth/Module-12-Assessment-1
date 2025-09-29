@@ -3,7 +3,7 @@ body {
     padding: 0;  
     width: 100%;                                           
     background-color: white;
-    overflow-x: hidden; 
+    overflow-x: hidden;
 }
 
 #left-column {
@@ -32,7 +32,7 @@ body {
     text-align: center;
 }
 
-#right-column img:first-child {
+#right-column img:first-of-type {
     width: 300px;
     margin-top: 50px;
 }
@@ -44,12 +44,12 @@ body {
     right: 10px;
 }
 
-/* Make sure draggable items can move freely */
-.ui-draggable {
+/* Fix for draggable items */
+.draggable {
     position: relative;
-    z-index: 100;
 }
 
 .ui-draggable-dragging {
-    z-index: 1000 !important;
+    transform: scale(1.2);
+    z-index: 10000;
 }
