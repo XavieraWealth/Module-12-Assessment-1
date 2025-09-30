@@ -420,8 +420,9 @@ load:function(d){d=this._getIndex(d);var h=this,i=this.options,j=this.anchors.eq
 url:function(d,h){this.anchors.eq(d).removeData("cache.tabs").data("load.tabs",h);return this},length:function(){return this.anchors.length}});b.extend(b.ui.tabs,{version:"1.8.9"});b.extend(b.ui.tabs.prototype,{rotation:null,rotate:function(d,h){var i=this,j=this.options,n=i._rotate||(i._rotate=function(q){clearTimeout(i.rotation);i.rotation=setTimeout(function(){var l=j.selected;i.select(++l<i.anchors.length?l:0)},d);q&&q.stopPropagation()});h=i._unrotate||(i._unrotate=!h?function(q){q.clientX&&
 i.rotate(null)}:function(){t=j.selected;n()});if(d){this.element.bind("tabsshow",n);this.anchors.bind(j.event+".tabs",h);n()}else{clearTimeout(i.rotation);this.element.unbind("tabsshow",n);this.anchors.unbind(j.event+".tabs",h);delete this._rotate;delete this._unrotate}return this}})})(jQuery);
 
-$( init );
-
-function init() {
-    $('.draggable').draggable();
-}
+$(document).ready(function() {
+    $('.draggable').draggable({
+        containment: 'document',
+        cursor: 'move'
+    });
+});
