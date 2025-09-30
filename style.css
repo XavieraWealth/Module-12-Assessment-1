@@ -57,7 +57,8 @@ body {
     width: 160px !important;
 }
 
-.placed-item[data-type="shoes"] {
+.placed-item[data-type="shoe-left"],
+.placed-item[data-type="shoe-right"] {
     width: 100px !important;
 }
 
